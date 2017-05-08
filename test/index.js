@@ -122,6 +122,17 @@ describe('fsm', () => {
         assert.deepEqual(m('a').type, QUIT);
     });
 
+    it('repeat:2', () => {
+        let m = fsm(g(
+            repeat('a', 3, 'accept')
+        ));
+
+        assert.deepEqual(m('a').type, WAIT);
+        assert.deepEqual(m('a').type, WAIT);
+        assert.deepEqual(m('a').type, MATCH);
+        assert.deepEqual(m('a').type, QUIT);
+    });
+
     it('sequence', () => {
         let m = fsm(g(
             sequence('a', 'b', 'c', 'accept')
