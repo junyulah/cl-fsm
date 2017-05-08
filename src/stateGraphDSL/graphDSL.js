@@ -7,7 +7,7 @@ let {
 let actionDSL = require('./actionDSL');
 
 let {
-    toAction, isNormalAction, isRangeAction, isUnionAction
+    toAction
 } = actionDSL;
 
 let {
@@ -136,38 +136,6 @@ let sequence = (...args) => {
 
 let isEpsilonTransition = (v) => {
     return isObject(v) && v.type === 'deliver';
-};
-
-let matchAction = (action, letter) => {
-    if (isNormalAction(action) && action.content === letter) return true;
-    if (isRangeAction(action) && action.start <= letter && letter <= action.end) return true;
-    if (isUnionAction(action)) {
-        let {
-            actions
-        } = action;
-
-        for (let i = 0; i < actions.length; i++) {
-            if (matchAction(actions[i], letter)) return true;
-        }
-    }
-
-    return false;
-};
-
-let containActionType = (action, type) => {
-    if (isUnionAction(action)) {
-        let {
-            actions
-        } = action;
-
-        for (let i = 0; i < actions.length; i++) {
-            if (containActionType(actions[i], type)) return true;
-        }
-    } else {
-        return type(action);
-    }
-
-    return false;
 };
 
 module.exports = mergeMap(actionDSL, {
