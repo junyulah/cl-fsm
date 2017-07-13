@@ -12,8 +12,6 @@ let {
  * }
  */
 
-const __basic_action_type__ = 'action_type_specified';
-
 const LEFT_TYPE = 'left',
     RANGE_TYPE = 'range',
     UNION_TYPE = 'union',
@@ -24,21 +22,18 @@ let toAction = (v) => {
     if (isAction(v)) return v;
     if (v === null) return {
         content: v,
-        actionType: EPSILON_TYPE,
-        __basic_action_type__
+        actionType: EPSILON_TYPE
 
     };
     return {
         content: v,
-        actionType: NORMAL_TYPE,
-        __basic_action_type__
+        actionType: NORMAL_TYPE
     };
 };
 
 let left = () => {
     return {
-        actionType: LEFT_TYPE,
-        __basic_action_type__
+        actionType: LEFT_TYPE
     };
 };
 
@@ -46,8 +41,7 @@ let range = (start, end) => {
     return {
         actionType: RANGE_TYPE,
         start,
-        end,
-        __basic_action_type__
+        end
     };
 };
 
@@ -62,13 +56,12 @@ let union = (...actions) => {
 
     return {
         actionType: UNION_TYPE,
-        actions,
-        __basic_action_type__
+        actions
     };
 };
 
 let isAction = (v) => {
-    return isObject(v) && v.__basic_action_type__ === __basic_action_type__;
+    return isObject(v) && v.actionType;
 };
 
 let isLeftAction = (v) => isAction(v) && v.actionType === LEFT_TYPE;
@@ -82,7 +75,6 @@ let isNormalAction = (v) => isAction(v) && v.actionType === NORMAL_TYPE;
 let isEpsilonAction = (v) => isAction(v) && v.actionType === EPSILON_TYPE;
 
 module.exports = {
-    isAction,
     isLeftAction,
     isRangeAction,
     isUnionAction,

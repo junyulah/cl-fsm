@@ -4,7 +4,7 @@
   "description": "Simple FSM DSL",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/**/*.js",
+    "test": "mocha test/function/**/*.js",
     "cover": "istanbul cover _mocha"
   },
   "repository": {
@@ -26,7 +26,7 @@
   "homepage": "https://github.com/LoveKino/cl-fsm#readme",
   "devDependencies": {
     "istanbul": "^0.4.5",
-    "mocha": "^3.3.0",
+    "mocha": "^3.4.2",
     "readme-builder": "0.0.12"
   },
   "dependencies": {

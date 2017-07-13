@@ -3,11 +3,11 @@
 let {
     fsm,
     WAIT, MATCH
-} = require('..');
+} = require('../..');
 
 let {
     numberGraph
-} = require('../apply/json');
+} = require('../../apply/json');
 
 let assert = require('assert');
 
