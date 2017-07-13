@@ -35,7 +35,7 @@ let {
  */
 
 let count = 0;
-let autoGraphState = () => {
+let autoGenerateGraphStateName = () => {
     return `__auto_state_name_${count++}`;
 };
 
@@ -49,24 +49,24 @@ let autoGraphState = () => {
  */
 let graph = (...args) => {
     let state = null,
-        lines = null;
+        transitions = null;
 
     if (isString(args[0])) {
-        state = args[0];
-        lines = args.slice(1);
+        state = args[0]; // first argument could be name
+        transitions = args.slice(1);
     } else {
-        state = autoGraphState();
-        lines = args;
+        state = autoGenerateGraphStateName();
+        transitions = args;
     }
 
     let transitionMap = {};
 
     transitionMap[state] = [];
 
-    for (let i = 0; i < lines.length; i++) {
+    for (let i = 0; i < transitions.length; i++) {
         let {
             action, nextGraph
-        } = lines[i];
+        } = transitions[i];
 
         let nextState = isString(nextGraph) ? nextGraph : nextGraph.state;
 
@@ -92,7 +92,7 @@ let graph = (...args) => {
 
 let connect = (action, nextGraph) => {
     action = toAction(action);
-    if(!nextGraph) nextGraph = autoGraphState();
+    if(!nextGraph) nextGraph = autoGenerateGraphStateName();
     return {
         action,
         nextGraph
@@ -103,7 +103,7 @@ let connect = (action, nextGraph) => {
  * circle: repeat at least 0 times
  */
 let circle = (action, nextGraph) => {
-    let stateName = autoGraphState();
+    let stateName = autoGenerateGraphStateName();
 
     return graph(stateName,
         connect(action, stateName),

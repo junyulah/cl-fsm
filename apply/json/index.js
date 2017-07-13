@@ -32,7 +32,7 @@ let numberGraph = g(c(union(null, '-'),
 
 let hexDigit = union(range('0', '9'), range('A', 'F'), range('a', 'f'));
 
-let escapeSymbols = union('"', '\\', '\/', 'b', 'f', 'n', 'r', 't');
+let escapeSymbols = union('"', '\\', '/', 'b', 'f', 'n', 'r', 't');
 
 let stringGraph = g(
     c('"', g('enter',

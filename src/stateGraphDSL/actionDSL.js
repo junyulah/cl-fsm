@@ -12,7 +12,7 @@ let {
  * }
  */
 
-const __basic_action_type__ = '7e942534-ea8b-4c75-90fd-705aec328d00';
+const __basic_action_type__ = 'action_type_specified';
 
 const LEFT_TYPE = 'left',
     RANGE_TYPE = 'range',
