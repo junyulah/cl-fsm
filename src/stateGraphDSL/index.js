@@ -1,6 +1,6 @@
 'use strict';
 
-let actionDSL = require('./actionDSL');
+let actionDSL = require('./action');
 
 let {
     isNormalAction, isRangeAction, isUnionAction, isLeftAction, isEpsilonAction
@@ -8,15 +8,12 @@ let {
 
 let {
     graph,
-    connect,
-
-    repeat,
-    sequence,
-
-    circle,
-
     isEpsilonTransition
-} = require('./graphDSL');
+} = require('./graph');
+
+let {
+    connect, repeat, sequence, circle
+} = require('./transition');
 
 let {
     mergeMap
