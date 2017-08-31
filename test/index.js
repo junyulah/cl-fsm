@@ -1,14 +1,24 @@
 'use strict';
 
 let {
-    fsm, stateGraphDSL,
-    QUIT, WAIT, MATCH
+    fsm,
+    stateGraphDSL,
+    QUIT,
+    WAIT,
+    MATCH
 } = require('..');
 
 let assert = require('assert');
 
 let {
-    g, c, repeat, union, left, range, sequence, circle
+    g,
+    c,
+    repeat,
+    union,
+    left,
+    range,
+    sequence,
+    circle
 } = stateGraphDSL;
 
 describe('fsm', () => {
@@ -150,5 +160,24 @@ describe('fsm', () => {
         for (let i = 0; i < 10; i++) {
             assert.deepEqual(m('a').type, MATCH);
         }
+    });
+
+    it('match brace', () => {
+        let m = fsm(g(sequence(
+            '.',
+            '[',
+
+            union('_', range('a', 'z'), range('A', 'Z')),
+            circle(
+                union('_', range('a', 'z'), range('A', 'Z'), range('0', '9')),
+                g(c(']'))
+            )
+        )));
+
+        assert.deepEqual(m('.').type, WAIT);
+        assert.deepEqual(m('[').type, WAIT);
+        assert.deepEqual(m('w').type, WAIT);
+        assert.deepEqual(m('h').type, WAIT);
+        assert.deepEqual(m(']').type, MATCH);
     });
 });
