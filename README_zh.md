@@ -34,34 +34,14 @@ Simple FSM DSL
 
 ```js
 let FSM = require('cl-fsm')
-let {
-    stateGraphDSL, fsm, WAIT, MATCH
-} = FSM;
+let {RegularExp} = FSM;
 
-let {
-    g, c, union, range, sequence, circle, left, repeat
-} = stateGraphDSL;
+let reg = new RegularExp('[ab]c*');
 
-let hexDigit = union(range('0', '9'), range('A', 'F'), range('a', 'f'));
-
-let escapeSymbols = union('"', '\\', '\/', 'b', 'f', 'n', 'r', 't');
-
-let stringDFA = g(
-    c('"', g('enter',
-        c('\\', g(
-            c(escapeSymbols, 'enter'),
-            c('u',
-                g(repeat(hexDigit, 4, 'enter'))
-            ))),
-        c('"', 'accept'),
-        c(left(), 'enter')
-    )));
-
-let m = fsm(stringDFA);
-console.log(m('"').type === WAIT);
-console.log(m('a').type === WAIT);
-console.log(m('b').type === WAIT);
-console.log(m('"').type === MATCH);
+console.log(reg.test('a'));
+console.log(reg.test('b'));
+console.log(reg.test('acccccc'));
+console.log(reg.test('efff'));
 ```
 
 ```
@@ -70,7 +50,7 @@ console.log(m('"').type === MATCH);
     true
     true
     true
-    true
+    false
 
 ```
 
@@ -84,36 +64,26 @@ console.log(m('"').type === MATCH);
 │──LICENSE    
 │──README.md    
 │──README_zh.md    
-│──apply    
-│   └──json    
-│       └──index.js    
+│──TODO.md    
 │──benchmark    
 │   └──index.js    
-│──coverage    
-│   │──coverage.json    
-│   │──lcov-report    
-│   │   │──base.css    
-│   │   │──cl-fsm    
-│   │   │   │──index.html    
-│   │   │   └──index.js.html    
-│   │   │──index.html    
-│   │   │──prettify.css    
-│   │   │──prettify.js    
-│   │   │──sort-arrow-sprite.png    
-│   │   └──sorter.js    
-│   └──lcov.info    
 │──index.js    
-│──package.json    
-│──src    
-│   │──const.js    
+│──lib    
+│   │──commonTokenReg.js    
+│   │──dfa.js    
 │   │──index.js    
-│   └──stateGraphDSL    
-│       │──actionDSL.js    
-│       │──graphDSL.js    
-│       └──index.js    
+│   │──nfa.js    
+│   │──parser.js    
+│   │──regularExp.js    
+│   │──thompsonConstruction.js    
+│   └──thompsonNFA.js    
+│──package.json    
 └──test    
-    │──index.js    
-    └──json.js     
+    └──function    
+        │──dfa_nfa.js    
+        │──parser.js    
+        │──regularExp.js    
+        └──thompson.js     
 ```
 
 

@@ -1,11 +1,11 @@
 {
   "name": "cl-fsm",
-  "version": "0.0.2",
-  "description": "Simple FSM DSL",
+  "version": "0.0.3",
+  "description": "Regular Expression",
   "main": "index.js",
   "scripts": {
     "test": "mocha test/function/**/*.js",
-    "cover": "istanbul cover _mocha"
+    "cover": "istanbul cover _mocha test/function/**/*.js"
   },
   "repository": {
     "type": "git",
@@ -25,12 +25,10 @@
   },
   "homepage": "https://github.com/LoveKino/cl-fsm#readme",
   "devDependencies": {
+    "benchmark": "^2.1.4",
     "istanbul": "^0.4.5",
     "mocha": "^3.4.2",
     "readme-builder": "0.0.12"
   },
-  "dependencies": {
-    "basetype": "^0.1.4",
-    "bolzano": "^0.1.1"
-  }
+  "dependencies": {}
 }

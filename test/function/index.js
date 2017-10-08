@@ -1,11 +1,27 @@
 'use strict';
 
 let {
-    runCaseData
-} = require('../util');
+    RegularExp
+} = require('../../lib');
 
-let caseData = require('../fixture/caseData/base');
+let assert = require('assert');
 
-describe('fsm', () => {
-    runCaseData(caseData);
+describe('index', () => {
+    it('base', () => {
+        let reg = new RegularExp('abc|[def]gh');
+        let state = reg.getStartState();
+        state = reg.transit(state, 'e');
+        assert(!reg.isEndState(state));
+        assert(!reg.isErrorState(state));
+
+        state = reg.transit(state, 'g');
+        assert(!reg.isEndState(state));
+        assert(!reg.isErrorState(state));
+
+        state = reg.transit(state, 'h');
+        assert(reg.isEndState(state));
+
+        state = reg.transit(state, 'r');
+        assert(reg.isErrorState(state));
+    });
 });
