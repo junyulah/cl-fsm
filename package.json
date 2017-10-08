@@ -1,7 +1,7 @@
 {
   "name": "cl-fsm",
   "version": "0.0.3",
-  "description": "Regular Expression",
+  "description": "Regular Expression && FSM",
   "main": "index.js",
   "scripts": {
     "test": "mocha test/function/**/*.js",

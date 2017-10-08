@@ -2,7 +2,7 @@
 
 [中文文档](./README_zh.md)   [document](./README.md)
 
-Simple FSM DSL
+Regular Expression
 - [install](#install)
 - [usage](#usage)
   * [API quick run](#api-quick-run)
@@ -55,6 +55,42 @@ output
 ```
 
 
+
+```js
+let FSM = require('cl-fsm')
+let {RegularExp} = FSM;
+
+let reg = new RegularExp('abc|[def]gh');
+let state = reg.getStartState();
+
+state = reg.transit(state, 'e');
+console.log(reg.isEndState(state));
+console.log(reg.isErrorState(state));
+
+state = reg.transit(state, 'g');
+console.log(reg.isEndState(state));
+console.log(reg.isErrorState(state));
+
+state = reg.transit(state, 'h');
+console.log(reg.isEndState(state));
+
+state = reg.transit(state, 'r');
+console.log(reg.isErrorState(state));
+```
+
+```
+output
+
+    false
+    false
+    false
+    false
+    true
+    true
+
+```
+
+
 ## develop
 
 ### file structure
@@ -67,6 +103,26 @@ output
 │──TODO.md    
 │──benchmark    
 │   └──index.js    
+│──coverage    
+│   │──coverage.json    
+│   │──lcov-report    
+│   │   │──base.css    
+│   │   │──index.html    
+│   │   │──lib    
+│   │   │   │──commonTokenReg.js.html    
+│   │   │   │──dfa.js.html    
+│   │   │   │──index.html    
+│   │   │   │──index.js.html    
+│   │   │   │──nfa.js.html    
+│   │   │   │──parser.js.html    
+│   │   │   │──regularExp.js.html    
+│   │   │   │──thompsonConstruction.js.html    
+│   │   │   └──thompsonNFA.js.html    
+│   │   │──prettify.css    
+│   │   │──prettify.js    
+│   │   │──sort-arrow-sprite.png    
+│   │   └──sorter.js    
+│   └──lcov.info    
 │──index.js    
 │──lib    
 │   │──commonTokenReg.js    
@@ -81,6 +137,7 @@ output
 └──test    
     └──function    
         │──dfa_nfa.js    
+        │──index.js    
         │──parser.js    
         │──regularExp.js    
         └──thompson.js     
