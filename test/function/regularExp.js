@@ -16,15 +16,24 @@ let testRegularExp = (testData) => {
                 let [matchs, notMatchs = []] = caseData[regExpStr];
                 let reg = new RegularExp(regExpStr);
                 matchs.forEach((item) => {
-                    assert(reg.test(item), item);
+                    assert(testReg(reg, item), item);
                 });
 
                 notMatchs.forEach((item) => {
-                    assert(!reg.test(item), item);
+                    assert(!testReg(reg, item), item);
                 });
             });
         }
     }
+};
+
+const testReg = (reg, item) => {
+    if (!reg.test(item)) return false;
+
+    // test serialize
+    const str = JSON.stringify(reg.toJSONObj());
+    const newReg = new RegularExp(JSON.parse(str));
+    return newReg.test(item);
 };
 
 describe('regularExp', () => {

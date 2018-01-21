@@ -1,6 +1,6 @@
 {
   "name": "cl-fsm",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Regular Expression && FSM",
   "main": "index.js",
   "scripts": {
