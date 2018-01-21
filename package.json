@@ -4,6 +4,7 @@
   "description": "Regular Expression && FSM",
   "main": "index.js",
   "scripts": {
+    "bench": "node benchmark/index.js",
     "test": "mocha test/function/**/*.js",
     "cover": "istanbul cover _mocha test/function/**/*.js"
   },
